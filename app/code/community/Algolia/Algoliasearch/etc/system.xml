@@ -969,6 +969,76 @@
                         </index_all_category_product_on_category_update>
                     </fields>
                 </advanced>
+                <advanced_settings translate="label">
+                    <label>Advanced - Extra Algolia indices settings</label>
+                    <expanded>0</expanded>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Use JSON!]]></comment>
+                    <fields>
+                        <products_extra_settings translate="label comment">
+                            <label>Products' indices extra settings</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>algoliasearch/system_config_backend_ExtraSettings</backend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use JSON!]]></comment>
+                        </products_extra_settings>
+                    </fields>
+                    <fields>
+                        <categories_extra_settings translate="label comment">
+                            <label>Categories' indices extra settings</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>algoliasearch/system_config_backend_ExtraSettings</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use JSON!]]></comment>
+                        </categories_extra_settings>
+                    </fields>
+                    <fields>
+                        <pages_extra_settings translate="label comment">
+                            <label>Pages' indices extra settings</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>algoliasearch/system_config_backend_ExtraSettings</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use JSON!]]></comment>
+                        </pages_extra_settings>
+                    </fields>
+                    <fields>
+                        <suggestions_extra_settings translate="label comment">
+                            <label>Suggestions' indices extra settings</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>algoliasearch/system_config_backend_ExtraSettings</backend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use JSON!]]></comment>
+                        </suggestions_extra_settings>
+                    </fields>
+                    <fields>
+                        <additional_sections_extra_settings translate="label comment">
+                            <label>Additional sections' indices extra settings</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>algoliasearch/system_config_backend_ExtraSettings</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use JSON!]]></comment>
+                        </additional_sections_extra_settings>
+                    </fields>
+                </advanced_settings>
             </groups>
         </algoliasearch>
     </sections>

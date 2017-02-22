@@ -100,4 +100,46 @@ class ConfigTest extends TestCase
         }
         $this->assertTrue($categoriesAttributeIsIncluded, 'Categories attribute should be included in facets, but it is not');
     }
+
+    public function testExtraSettings()
+    {
+        // Initial save to make sure indices are created
+        $this->observer->saveSettings();
+        $this->algoliaHelper->waitLastTask();
+
+        $sections = array('products', 'categories', 'pages', 'suggestions');
+
+        foreach ($sections as $section) {
+            $indexName = $this->indexPrefix.'default_'.$section;
+
+            $this->algoliaHelper->setSettings($indexName, array('exactOnSingleWordQuery' => 'attribute'));
+        }
+
+        $this->algoliaHelper->waitLastTask();
+
+        foreach ($sections as $section) {
+            $indexName = $this->indexPrefix.'default_'.$section;
+
+            $currentSettings = $this->algoliaHelper->getIndex($indexName)->getSettings();
+
+            $this->assertArrayHasKey('exactOnSingleWordQuery', $currentSettings);
+            $this->assertEquals('attribute', $currentSettings['exactOnSingleWordQuery']);
+        }
+
+        foreach ($sections as $section) {
+            setConfig('algoliasearch/advanced_settings/'.$section.'_extra_settings', '{"exactOnSingleWordQuery":"word"}');
+        }
+
+        $this->observer->saveSettings();
+        $this->algoliaHelper->waitLastTask();
+
+        foreach ($sections as $section) {
+            $indexName = $this->indexPrefix.'default_'.$section;
+
+            $currentSettings = $this->algoliaHelper->getIndex($indexName)->getSettings();
+
+            $this->assertArrayHasKey('exactOnSingleWordQuery', $currentSettings);
+            $this->assertEquals('word', $currentSettings['exactOnSingleWordQuery']);
+        }
+    }
 }

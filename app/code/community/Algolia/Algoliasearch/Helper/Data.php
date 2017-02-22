@@ -100,6 +100,8 @@ class Algolia_Algoliasearch_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         $this->product_helper->setSettings($storeId, $saveToTmpIndicesToo);
+
+        $this->setExtraSettings($storeId, $saveToTmpIndicesToo);
     }
 
     public function getSearchResult($query, $storeId)
@@ -639,5 +641,30 @@ class Algolia_Algoliasearch_Helper_Data extends Mage_Core_Helper_Abstract
             
         return Mage::EDITION_ENTERPRISE === Mage::getEdition() && version_compare(Mage::getVersion(), '1.14.3', '>=') ||
                Mage::EDITION_COMMUNITY === Mage::getEdition() && version_compare(Mage::getVersion(), '1.9.3', '>=');
+    }
+
+    private function setExtraSettings($storeId, $saveToTmpIndicesToo)
+    {
+        $sections = array(
+            'products' => $this->product_helper->getIndexName($storeId),
+            'categories' => $this->category_helper->getIndexName($storeId),
+            'pages' => $this->page_helper->getIndexName($storeId),
+            'suggestions' => $this->suggestion_helper->getIndexName($storeId),
+            'additional_sections' => $this->additionalsections_helper->getIndexName($storeId),
+        );
+
+        foreach ($sections as $section => $indexName) {
+            $extraSettings = $this->config->getExtraSettings($section, $storeId);
+
+            if ($extraSettings) {
+                $extraSettings = json_decode($extraSettings, true);
+
+                $this->algolia_helper->setSettings($indexName, $extraSettings, true);
+
+                if ($section === 'products' && $saveToTmpIndicesToo === true) {
+                    $this->algolia_helper->setSettings($indexName.'_tmp', $extraSettings, true);
+                }
+            }
+        }
     }
 }
